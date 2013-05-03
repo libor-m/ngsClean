@@ -1,0 +1,9 @@
+[submodule "external_progs/scythe"]
+	path = external_progs/scythe
+	url = git://github.com/vsbuffalo/scythe.git
+[submodule "external_progs/sickle"]
+	path = external_progs/sickle
+	url = git://github.com/najoshi/sickle.git
+[submodule "external_progs/cutadapt"]
+	path = external_progs/cutadapt
+	url = git://github.com/marcelm/cutadapt.git
