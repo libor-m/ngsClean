@@ -1,0 +1,49 @@
+
+Pipeline for NGS data analysis
+==============================
+The idea behind this script is have a simple way to go from raw FASTQ reads to 
+BAM files. Briefly:
+
+1) Read QC.
+% ./filter_reads.sh file_1.fastq file_2.fastq
+
+If file_2.fastq ommited assumes single end reads.
+
+
+2) Read mapping. Not included here! Use your favorite read mapping program (eg. 
+BWA, Bowtie2, SNAP, ...)
+
+
+3) SNP QC
+% ./filter_SNP.sh run_ID $N_IND $CHR bam_list.txt $REF_SEQ $ANC_SEQ
+
+The output from this step is a BED file with the positions that passed the 
+quality filters. This file can be used on all downstream analysis
+
+
+4) Check VCF and SFS to assess overall quality of data.
+% Rscript analyze_vcf.R myvariants.vcf output_file
+
+
+
+
+Script Description
+==================
+
+filter_reads.sh      Script to perform raw reads QC. Namely, read filtering, 
+		     quality trimming, adaptor trimming, PE read merging,...
+
+filter_SNP.sh        SNP QC based on min/max depth, HWE, quality bias, strand 
+		     bias, ... It calls the scripts below.
+
+get_mut_bias.pl	     Script to plot the mutation frequency bias along the read. 
+		     It was developed to deal with ancient DNA.
+
+get_depth_thresh.R   R script to automatically define the upper and lower depth
+		     coverage limits on SNPcleaner. It fits a mixture of Gamma 
+		     and Neg-Binomial distribution to the empirical read coverage 
+		     distribution.
+
+SNPcleaner.pl        Filters sites from VCF files following a set of rules.
+
+analyze_vcf.R	     Script to visualize aspects of data in VCF files.
