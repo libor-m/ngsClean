@@ -21,6 +21,8 @@ opt <- parse_args(OptionParser(option_list = option_list))
 plot_in_data <- c()
 plot_sim_data <- c()
 plot_out_data <- c()
+options(warn=-1)
+
 
 #################
 ### Functions ###
@@ -173,7 +175,7 @@ plot <- ggplot() +
   geom_vline(xintercept=l_lim, colour="blue") +
   geom_vline(xintercept=u_lim, colour="blue") +
 #  facet_wrap(~ variable) +
-  opts( title=paste("Fit of Gamma and NBinomial to data (n = ", opt$rnd_sample, " / seed = ", seed, ")\n",
+  ggtitle( paste("Fit of Gamma and NBinomial to data (n = ", opt$rnd_sample, " / seed = ", seed, ")\n",
           "shape = ", shape, " / scale = ", scale,
           " / size = ", size, " / mu = ", mu, " / p = ", prob,
           " / mix_prop = ", mix_prop,
