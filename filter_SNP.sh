@@ -54,6 +54,13 @@ fi
 ### Filtering Step ###
 ######################
 if [[ ! -s $ID.bed ]]; then
+    echo "==> Left alignemnt reads (TODO)"
+
+    echo "==> Local realignment with GATK (TODO)"
+    #./gatk -I $i  -T RealignerTargetCreator -R hg19/hg19Chr.fa -o $ONAME.intervals -known $KIND -known $KIND2 -nt 3
+    #./gatk -T IndelRealigner -R hg19/hg19Chr.fa -I $i -o $ONAME -targetIntervals $ONAME.intervals -known $KIND -known $KIND2  -LOD 0.4 -model KNOWNS_ONLY -compress 0 --disable_bam_indexing
+
+
     echo "==> Filter out individuals with extreme low/high depths (TODO)"
     
 
