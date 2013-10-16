@@ -460,7 +460,7 @@ while (<>) {
 	my $extra_bytes_per_line = $ancestral{$cur_contig}{'n_bytes'} - $ancestral{$cur_contig}{'n_chars'};
 	seek(FASTA, $ancestral{$cur_contig}{'start'} + $pos - 1 + $n_lines*$extra_bytes_per_line, 0);
 	read(FASTA, $anc_base, 1);
-	$anc_base = 'N' if($anc_base =~ m/[RYSWKMBDHV]/i);
+	$anc_base = 'N' if($anc_base =~ m/[RYSWKMBDHV\.\?]/i);
 	warn("WARNING: invalid ancestral base at ",$cur_contig,", pos ",$pos,": ",$anc_base,".\n") if($anc_base !~ m/[ACTGN]/i);
 
 	# Skip non-biallelic sites (major and minor differ from ANCESTRAL)
@@ -918,6 +918,7 @@ sub type_test {
 			# skip to next individual if read depth is zero
 			
 			if ($pileup[$i] == 0) {
+				last if $i+1 > $#pileup;
 				$i += 2 if $pileup[$i+1] eq '*';
 				next;
 				}
@@ -981,6 +982,7 @@ sub individualStrandBias {
 			# skip to next individual if read depth is zero
 			
 			if ($pileup[$i] == 0) {
+				last if $i+1 > $#pileup;
 				$i += 2 if $pileup[$i+1] eq '*';
 				next;
 				}
@@ -1038,6 +1040,7 @@ sub DNAdamage {
 			# skip to next individual if read depth is zero
 			
 			if ($pileup[$i] == 0) {
+				last if $i+1 > $#pileup;
 				$i += 2 if $pileup[$i+1] eq '*';
 				next;
 				}
