@@ -480,7 +480,7 @@ while (<>) {
 	    	$violate .= "M";
 	    }
 	}	
-    }
+    
     
     # secondary mutation type (DNA damage) filter
     
@@ -500,6 +500,7 @@ while (<>) {
 			}
 		}
 	}
+    }
         
 	# get individual info flag indexes
     
